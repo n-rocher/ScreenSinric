@@ -8,8 +8,6 @@ const appKey = process.env.SINRIC_KEY
 const secretKey = process.env.SINRIC_SECRET
 const device1 = process.env.SINRIC_DEVICE
 
-const sinricpro = new SinricPro(appKey, [device1], secretKey, false);
-
 function setPowerState(deviceid, data) {
     console.log("setPowerState", data)
 
@@ -20,10 +18,29 @@ function setPowerState(deviceid, data) {
     return true
 }
 
-SinricProActions(sinricpro, {
-    setPowerState
-})
+function initiate() {
+    let sinricpro = new SinricPro(appKey, [device1], secretKey, false);
 
-setTimeout(_ => {
-    raiseEvent(sinricpro, eventNames.powerState, device1, { state: "On" });
-}, 5000)
+    SinricProActions(sinricpro, {
+        setPowerState
+    })
+
+    sinricpro.on("error", _ => {})
+
+    sinricpro.on("close", _ => {
+        console.info("[INFO] Close event")
+        sinricpro = null
+        setTimeout(initiate, 2000)
+    })
+
+    sinricpro.on("open", _ => {
+        console.info("[INFO] Open event")
+
+        setTimeout(_ => {
+            raiseEvent(sinricpro, eventNames.powerState, device1, { state: "On" });
+        }, 2000)
+    })
+
+}
+
+initiate()
