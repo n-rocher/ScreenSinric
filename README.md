@@ -1,6 +1,6 @@
 # ScreenSinric
 
-Allow you to turn off screen of your Windows computer using Google Home.
+Allows you to turn off screen of your Windows computer using Google Home.
 
 ## Usage
 You must indicate the value of `SINRIC_KEY`, `SINRIC_SECRET`, and `SINRIC_DEVICE` in a `.env` file. 
