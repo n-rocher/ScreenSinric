@@ -3,13 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^8.2.0",
     "node-windows": "^1.0.0-beta.5",
+    "robotjs": "^0.6.0",
     "sinricpro": "^2.2.5",
     "turn-off-display": "^0.2.0",
     "user-startup": "^0.2.2"
